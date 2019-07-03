@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-The-First-Day-of-DEAJOWLO-Using-node-js-create-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" class="article-date">
+  <time datetime="2019-07-03T02:25:42.000Z" itemprop="datePublished">2019-07-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/">The First Day of DEAJOWLO Using node js create blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="新建一个自己的博客并部署到gitlab上"><a href="#新建一个自己的博客并部署到gitlab上" class="headerlink" title="新建一个自己的博客并部署到gitlab上"></a>新建一个自己的博客并部署到gitlab上</h1><p>首先下载node.js（就是两大js运行环境之一），然后在你要建本地博客的地方打开你的cmd（目前操作都是在windows环境下的）<br>node -v<br>查看node.js版本<br>npm -v<br>查看包管理器版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> 这行代码是借助npm包管理器来指向cmpn淘宝镜像源，是下载速度快一点<br>下载完后可输入<br>cnpm和cnpm -v来查看cnpm和cnpm的版本号<br>然后输入<br>cnpm install -g hexo-cli意思是用cnpm来安装hexo博客框架，-g的意思就是全局安装<br>输入hexo -v 来验证一下，会发现它是基于node的<br>输入cd查看当前目录<br>输入mkdir 博客文件名 （创建一个用来放你要做博客的文件，之后所有博客里的东西都是在这个文件里的，如果出错，可以直接删除文件重来）<br>输入cd 博客文件名 ，进入这个文件<br>然后用hexo来完成新建博客<br>windows中可直接<br>输入hexo init来初始化一个博客<br>看到start blogging with hexo！就说明初始化完成。<br>输入dir 可以查看生成的配置文件<br>hexo s ，启动博客，结果会出现一个运行的本地端口，我生成在<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 可以在浏览器中输入该网址查看内容。<br>打开浏览器即可看见它自动生成的博客，Hello World<br>输入Ctrl+C退出，重新写一篇自己的文章。<br>输入 hexo n “文章名” 生成一个新的博客，结果会出现这个博客文章的路径<br>输入 cd 文章路径 （可查看）该文章</p>
+<h2 id="重点来了！"><a href="#重点来了！" class="headerlink" title="重点来了！"></a><font color="red">重点来了！</font></h2><p>因为我们是windows系统，它并不自带vim文本编辑器，但windows也很方便，在这里告诉大家一个简单的方法<br>去文件夹里找到博客，用记事本或别的文本编辑器打开，如everedit等等<br>然后将你要写的博客写进去，格式就是如下：</p>
+<pre><code>一级标题
+===
+
+内容
+
+
+&lt;font color=red &gt;二级标题&lt;/font&gt;  //可以设定颜色，大小size，字体font
+---
+
+内容</code></pre><p>即可。也可以在cmd里，<br>输入notepad 博客文件路径 ，就可以直接打开记事本书写了。<br>一般都是用markdown格式的语法，完成以后保存退出。<br>输入cd  （查询一下当前路径）<br>回到blog文件夹<br>输入cd ../..  （退两层路径）<br>输入 hexo clean （清理缓存）<br>输入hexo g （重新生成hexo文件）<br>输入 hexo s （启动hexo）<br>上面三条输入语言可通过<br>输入 hexo clean &amp;&amp; hexo g &amp;&amp; hexo s 一起运行<br>然后输入网址即可查看</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxmml9bj0000ycwag76nxqoi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/02/hello-world/" class="article-date">
+  <time datetime="2019-07-02T11:11:55.708Z" itemprop="datePublished">2019-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/02/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxmml9bs0001ycwabdmnqmiq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/">The First Day of DEAJOWLO Using node js create blog</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/02/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

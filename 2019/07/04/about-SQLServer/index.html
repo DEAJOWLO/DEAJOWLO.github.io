@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>about SQLServer | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于数据库知识点的整理搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间 数据库基础1.如何优化数据库查询 为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about SQLServer">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/about-SQLServer/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于数据库知识点的整理搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间 数据库基础1.如何优化数据库查询 为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-04T04:17:23.309Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about SQLServer">
+<meta name="twitter:description" content="关于数据库知识点的整理搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间 数据库基础1.如何优化数据库查询 为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-about-SQLServer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/04/about-SQLServer/" class="article-date">
+  <time datetime="2019-07-04T03:31:23.000Z" itemprop="datePublished">2019-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      about SQLServer
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于数据库知识点的整理"><a href="#关于数据库知识点的整理" class="headerlink" title="关于数据库知识点的整理"></a>关于数据库知识点的整理</h1><p>搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了<br>在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间</p>
+<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><p>1.如何优化数据库查询</p>
+<h2 id="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"><a href="#为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化" class="headerlink" title="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"></a>为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化</h2><p>（1）避免全表扫描。<br>首先考虑where和orderby涉及的列上建立索引<br><font color="#FFA07A">建立索引</font><br>避免在where语句中使用 != 或 &lt;&gt;操作符<br>避免在where语句中对字段进行null值判断<br>避免在where语句中使用or来连接条件<br>（2）select id from 表名 where name like “%abc%” 这样的查询语句也会导致全表扫描，可考虑全文检索提高效率<br>（3）慎用in 和 not in ，可用exists代替in<br>（4）避免在where语句中对字段进行表达式和函数操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxo5u59k000150wa950gybnf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">The First Day of DEAJOWLO Using node js create blog</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/04/about-SQLServer/">about SQLServer</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/">The First Day of DEAJOWLO Using node js create blog</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/02/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

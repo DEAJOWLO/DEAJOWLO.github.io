@@ -62,6 +62,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-about-SQLServer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/04/about-SQLServer/" class="article-date">
+  <time datetime="2019-07-04T03:31:23.000Z" itemprop="datePublished">2019-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/04/about-SQLServer/">about SQLServer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于数据库知识点的整理"><a href="#关于数据库知识点的整理" class="headerlink" title="关于数据库知识点的整理"></a>关于数据库知识点的整理</h1><p>搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了<br>在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间</p>
+<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><p>1.如何优化数据库查询</p>
+<h2 id="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"><a href="#为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化" class="headerlink" title="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"></a>为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化</h2><p>（1）避免全表扫描。<br>首先考虑where和orderby涉及的列上建立索引<br><font color="#FFA07A">建立索引</font><br>避免在where语句中使用 != 或 &lt;&gt;操作符<br>避免在where语句中对字段进行null值判断<br>避免在where语句中使用or来连接条件<br>（2）select id from 表名 where name like “%abc%” 这样的查询语句也会导致全表扫描，可考虑全文检索提高效率<br>（3）慎用in 和 not in ，可用exists代替in<br>（4）避免在where语句中对字段进行表达式和函数操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxo5u59k000150wa950gybnf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-The-First-Day-of-DEAJOWLO-Using-node-js-create-blog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" class="article-date">
@@ -125,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxo41xwx000084wa6bvxenbs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxo5u59b000050wa5cgse71o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxo41xx6000184wacwl9yarn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxo5u59n000250way6vitout" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,6 +252,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/07/04/about-SQLServer/">about SQLServer</a>
+          </li>
         
           <li>
             <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/">The First Day of DEAJOWLO Using node js create blog</a>

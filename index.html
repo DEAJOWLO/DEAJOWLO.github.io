@@ -85,13 +85,108 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="关于数据库知识点的整理"><a href="#关于数据库知识点的整理" class="headerlink" title="关于数据库知识点的整理"></a>关于数据库知识点的整理</h1><p>搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了<br>在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间</p>
-<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><p>1.如何优化数据库查询</p>
-<h2 id="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"><a href="#为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化" class="headerlink" title="为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化"></a>为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化</h2><p>（1）避免全表扫描。<br>首先考虑where和orderby涉及的列上建立索引<br><font color="#FFA07A">建立索引</font><br>避免在where语句中使用 != 或 &lt;&gt;操作符<br>避免在where语句中对字段进行null值判断<br>避免在where语句中使用or来连接条件<br>（2）select id from 表名 where name like “%abc%” 这样的查询语句也会导致全表扫描，可考虑全文检索提高效率<br>（3）慎用in 和 not in ，可用exists代替in<br>（4）避免在where语句中对字段进行表达式和函数操作</p>
+<p>&nbsp;&nbsp;我用的是MariaDB，所以可能会与MySql有所出入，但大体是不会有任何影响的。无非就是MySql中设置default时，必须用字母，但MaraiDB中可以用中文<br>MaraiDB使用XtraDB来代替MySql的InnoDB。<br>网上下载MariaDB会附带下载可视化工具HeiDiSQL，我建议用MariaDB，别的可视化工具也行，我用的是navicat Premium 12</p>
+<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h2 id="基础中的基础"><a href="#基础中的基础" class="headerlink" title="基础中的基础"></a><font color="#FFA07A">基础中的基础</font></h2><ol>
+<li><p>首先需要配置环境变量，将MariaDB的bin目录打开，复制路径，粘贴到我的电脑-&gt;属性-&gt;高级设置-&gt;环境变量-&gt;第一栏新建。</p>
+</li>
+<li><p>完成之后，打开cmd</p>
+</li>
+<li><p>mysql -uroot -proot    连接数据库 <font color="#DA70D6">末尾不需要分号</font></p>
+</li>
+<li><p>show databases;/show schemas;   查看数据库列表</p>
+</li>
+<li><p>use 数据库名;    进入某数据库</p>
+</li>
+<li><p>show tables;   查看数据库列表</p>
+</li>
+<li><p>show create table 表\G   查看建表语句</p>
+</li>
+<li><p>create user ‘用户名‘@’localhost’ identified by ‘密码’;  创建可以远程连接的数据库，这是创建用户的代码，由 ‘用户名‘@’ip地址’组合  这   里我的用户名是deajowlo，ip地址为localhost</p>
+</li>
+<li><p>grant all privileges on <em>.</em> to ‘用户名‘@’ip地址;   对用户授权，这里对用户授了所有表的所有权限。也可以只给一些权限，如：grant     select,insert,drop on <em>.</em> to ‘用户名‘@’ip地址;</p>
+</li>
+<li><p>flush privileges;   授权后刷新授权表</p>
+</li>
+<li><p>exit;    退出数据库  </p>
+</li>
+<li><p>重新远程连接mysql<br>mysql -u用户名 -p密码 -h地址</p>
+</li>
+<li><p>\q     退出</p>
+</li>
+<li><p>mysql -uroot -proot   以root身份重新连接</p>
+</li>
+<li><p>create database 数据库名 charset utf8;   创建数据库</p>
+</li>
+<li><p>show create databases 数据库名\G    查看建数据库的代码</p>
+</li>
+<li><p>alter databases 数据库名 charset gbk;   只能修改字符编码</p>
+</li>
+<li><p>drop database 数据库名;  删除数据库</p>
+</li>
+<li><p>show variables like ‘%datadir%’;   查看数据库目录  <font color="#DA70D6">like ‘%datadir<br>%’是模糊查询含有datadir字段的数据库目录</font></p>
+</li>
+<li><p>约束类型：primary key   主键约束；foreign key  外键约束；unique   唯一；check    检查； not null   非空</p>
+</li>
+</ol>
+<h2 id="一、如何优化数据库查询"><a href="#一、如何优化数据库查询" class="headerlink" title="一、如何优化数据库查询"></a><font color="#FFA07A" size:5>一、如何优化数据库查询</font></h2><p>为了优化用户体验，增加数据库的稳定性（低效的查询会引发很多数据库问题），避免网页出现访问错误（timeout产生的错误、查询慢引发的页面无法加载、阻塞造成数据库无法提交），通常我们会对数据库进行优化</p>
+<ol>
+<li>避免全表扫描。<br> 首先考虑where和orderby涉及的列上建立索引<br> 避免在where语句中使用 != 或 &lt;&gt;操作符<br> 避免在where语句中对字段进行null值判断<br> 避免在where语句中使用or来连接条件</li>
+<li>select id from 表名 where name like “%abc%” 这样的查询语句也会导致全表扫描，可考虑全文检索提高效率</li>
+<li>慎用in 和 not in ，可用exists代替in</li>
+<li>避免在where语句中对字段进行表达式和函数操作</li>
+</ol>
+<h2 id="二、索引"><a href="#二、索引" class="headerlink" title="二、索引"></a><font color="#FFA07A" size:5>二、索引</font></h2><p>1.为什么要创建索引<br>   假设有未创建索引的表t1,t2,t3，分别只包含c1，c2，c3列，每张表有1000行数据，让你做对应值相等的查询<br>   用select c1,c2,c3 from t1,t2,t3 where c1=c2 and c1=c3<br>   查询结果就是1000行，每行3个相等值，没有索引的话，可能的结果就是1000<em>1000</em>1000<br>   但若对表建立索引，就可以从表t1的第一行查，使用t2的索引，可定位到t2=t1的行，然后同样用在t3上，这样重复下去，只需要遍历t1的行就可以了。<br>2.建索引原则<br>   要在大数据量的表上建立<br>   在where子句或连接条件上常引用的列上建立<br>   需要多表查询时建立<br>   <font color="#DA70D6">很少或不引用的字段和逻辑型字段，如男或女、是或否 等不建立</font><br>3.创建索引<br>   （1）可在执行create table 语句时创建<br>         create table 表名(<br>         字段名 字段类型 index/primary key/unique<br>         )engine=innodb charset=utf8;<br>   （2）也可单独使用create index<br>        <font color="#DA70D6">create index 可对表增加普通索引或unique索引,不能创建primary key索引</font><br>        create index 索引名 on 表名(字段)<br>        或<br>        create unique index on 表名(字段)<br>   （3）也可以单独使用alter table 来创建普通索引、unique、primary key索引<br>        alter table 表名 add index 索引名(字段)<br>        或<br>        alter table 表名 add unique(字段)<br>        或<br>        alter table 表名 add primary key(字段)<br>   （4）删除索引<br>        drop index 索引名 on 表名<br>        或<br>        alter table 表名 drop index 索引名<br>        或<br>        alter table 表名 drop primary key/unique<br>   （5）查看索引<br>        show index from 表名<br>        或<br>        show keys from 表名<br>   （6）索引与约束的区别</p>
+<table>
+<thead>
+<tr>
+<th align="center">索引</th>
+<th align="center">约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">对数据库表中一列或多列的值进行排序的一种结构</td>
+<td align="center">对表中的数据进行进一步的限制</td>
+</tr>
+<tr>
+<td align="center">增加数据库的存储空间</td>
+<td align="center">保证数据的正确性、有效性和完整性</td>
+</tr>
+<tr>
+<td align="center">使插入、修改数据的时间变多</td>
+<td align="center">定义数据库中的数据必须符合的某些属性</td>
+</tr>
+<tr>
+<td align="center">可常驻内存进行处理</td>
+<td align="center">可以被当做数据库对象来处理</td>
+</tr>
+</tbody></table>
+<h2 id="在数据库条件查询时速度很慢该如何优化"><a href="#在数据库条件查询时速度很慢该如何优化" class="headerlink" title="在数据库条件查询时速度很慢该如何优化:"></a>在数据库条件查询时速度很慢该如何优化:</h2><p>1.建索引<br>2.减少表关联<br>3.优化sql，尽量让sql用索引定位，不要全表查询<br>4.简化查询字段，没有的字段不要，尽量返回少量数据<br>5.利用分页查询减少返回的数据量</p>
+<h2 id="三、分页查询"><a href="#三、分页查询" class="headerlink" title="三、分页查询"></a><font color="#FFA07A" size:5>三、分页查询</font></h2><p>分页查询方式：<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;<br>   distinct 表示去重，这种方式易丢失数据<br>       select distinct 字段 from 表 order by 字段 desc limit 10;<br>       select distinct 字段 from 表 where 字段 &lt; $last_min_字段 order by 字段 desc limit 10;<br>   $last_min_字段表示最后一个字段，这种方式没有命中唯一索引，而是一般索引，需要group by<br>       select 字段 from 表 group by 字段 order by 字段 desc limit 10;<br>       select 字段 from 表 group by 字段 having 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</p>
+<h2 id="四、一些关于表的基础sql语句"><a href="#四、一些关于表的基础sql语句" class="headerlink" title="四、一些关于表的基础sql语句"></a><font color="#FFA07A" size:5>四、一些关于表的基础sql语句</font></h2><ol>
+<li>添加字段：<br> alter table 表 add 字段 first;   //first指添加字段到第一个<br> alter table 表 add 字段 after 某字段;<br> alter table 表 add (字段1，字段2);</li>
+<li>修改字段：<br> alter table 表 modify 字段 字段新类型 新内容;</li>
+<li>调整字段顺序：<br> alter table 表 modify 字段 字段类型 first;  //将字段放在第一个<br> alter table 表 modify 字段 字段类型 after 某字段;   //将字段放在某字段后</li>
+<li>删除字段：<br> alter table 表 drop 字段;</li>
+<li>删除表：<br> alter table if exists 表;</li>
+<li>插入数据：<br> <font color="blue">insert into 表 values(内容);</font></li>
+<li>删除数据：<br> <font color="blue">delete from 表 where 字段=” “;</font></li>
+<li>修改数据：<br> <font color="blue">update 表 set 字段1=” “,字段2=” “ where 字段3=” “;</font></li>
+<li>查询字段：<br> <font color="blue">select 字段 from 表;</font><br> <font color="blue">select 字段1,字段2 from 表;</font><br> <font color="blue">select * from 表 where 字段要求;</font></li>
+<li>添加约束：<br>（1）添加主键约束<br>alter table 表 add primary key(字段1，字段2);  //这里的举例是用字段组合做主键，双主键，一般不用，大部分都只是一个主键<br>（2）添加外键约束<br>create table 表1 (<br>字段1 字段类型 primary key auto_increment);    //<font color="#DA70D6">primary key auto_increment</font><br>create table 表2 (<br>字段2 字段类型，<br>foreign  key(字段2) reference 表1(字段1)<br>);<br>或<br>alter table  表2 add foreign key(字段2) reference 表1(字段1);<br>（3）字段唯一组合约束<br>unique key(字段1，字段2); </li>
+<li>默认用default<br>注释用comment</li>
+<li>自表数据复制<br>insert into 表(字段) select 字段 from 表;   //把查询结果数据批量插入到一张表</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#FFA07A" size:5>总结</font></h2><ol>
+<li><p>sql语句执行顺序<br>from 子句   ，组装不同数据源的数据（如各种表格等等）<br>where       ，指定条件对记录筛选<br>group by    ，将数据划分为多个组<br>使用聚合函数计算的sql语句<br>having      ，筛选分组<br>计算所有的表达式<br>order by    ，对结果集排序</p>
+</li>
+<li><p>数据库执行计划<br>sql语句发送到数据库，要翻译成执行计划，利用执行计划执行实现<br>数据库在执行完全一样的sql语句时会重用相同的执行计划<br>有 ？ 参数的sql语言会重用相同的执行计划</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxo5u59k000150wa950gybnf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxprw4fl00021gwaeprmuiuf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxo5u59b000050wa5cgse71o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxprw4et00001gwa8gr0de71" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxo5u59n000250way6vitout" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxprw4f600011gwayceab1lw" class="article-share-link">Share</a>
       
       
     </footer>

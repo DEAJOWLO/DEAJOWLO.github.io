@@ -194,10 +194,10 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
 <li>简化查询字段，没有的字段不要，尽量返回少量数据</li>
 <li>利用分页查询减少返回的数据量</li>
 </ol>
-<h2 id="三、分页查询"><a href="#三、分页查询" class="headerlink" title="三、分页查询"></a><font color="#FFA07A" size:5>三、分页查询</font></h2><p>分页查询方式：<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;</p>
-<pre><code>select distinct 字段 from 表名 order by 字段 desc limit 0，10;</code></pre><p>   distinct 表示去重，这种方式易丢失数据<br>       select distinct 字段 from 表 order by 字段 desc limit 10;</p>
-<pre><code>select distinct 字段 from 表 where 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</code></pre><p>   $last_min_字段表示最后一个字段，这种方式没有命中唯一索引，而是一般索引，需要group by<br>       select 字段 from 表 group by 字段 order by 字段 desc limit 10;</p>
-<pre><code>select 字段 from 表 group by 字段 having 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</code></pre><h2 id="四、一些关于表的基础sql语句"><a href="#四、一些关于表的基础sql语句" class="headerlink" title="四、一些关于表的基础sql语句"></a><font color="#FFA07A" size:5>四、一些关于表的基础sql语句</font></h2><ol>
+<h2 id="三、分页查询"><a href="#三、分页查询" class="headerlink" title="三、分页查询"></a><font color="#FFA07A" size:5>三、分页查询</font></h2><p>分页查询方式：<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;</p>
+<p>   distinct 表示去重，这种方式易丢失数据<br>       select distinct 字段 from 表 order by 字段 desc limit 10;<br>       select distinct 字段 from 表 where 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</p>
+<p>   $last_min_字段表示最后一个字段，这种方式没有命中唯一索引，而是一般索引，需要group by<br>       select 字段 from 表 group by 字段 order by 字段 desc limit 10;<br>       select 字段 from 表 group by 字段 having 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</p>
+<h2 id="四、一些关于表的基础sql语句"><a href="#四、一些关于表的基础sql语句" class="headerlink" title="四、一些关于表的基础sql语句"></a><font color="#FFA07A" size:5>四、一些关于表的基础sql语句</font></h2><ol>
 <li>添加字段：<br> alter table 表 add 字段 first;   //first指添加字段到第一个<br> alter table 表 add 字段 after 某字段;<br> alter table 表 add (字段1，字段2);</li>
 <li>修改字段：<br> alter table 表 modify 字段 字段新类型 新内容;</li>
 <li>调整字段顺序：<br> alter table 表 modify 字段 字段类型 first;  //将字段放在第一个<br> alter table 表 modify 字段 字段类型 after 某字段;   //将字段放在某字段后</li>
@@ -214,7 +214,20 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
 <li>按指定字段排序，并只修改前几行<br>update 表 set 字段1=” “,字段2=” “<br>order by a<br>limit 5;</li>
 <li>指定字段排序，并删除前几行<br>delete from 表<br>order by a<br>limit 5;</li>
 <li>通配符<br>_  单字符<br>%  多字符<br>\转义</li>
-<li>weher子句<br>（1）id=10;<br>id&lt;&gt;10;<br>id&lt;10;</li>
+<li>weher子句<br>（1）id=10;   id是10<pre><code>id&lt;&gt;10;  id不是10
+id&lt;10;   id小于10
+id between 2 and 10;    id在2和10之间
+id in(2,4,6);         id是2，4，6的
+id is null;        id是null值
+name like &apos;%en%&apos;;      名字包含en
+name like &apos;_en%&apos;;      名字第三、四个字符是en
+name like &apos;en%&apos;;       名字以en开头
+id not between 2 and 10;        id小于2或id大于5的
+id not in(2,4,6);        id不是2，4，6的
+id is not null;       id不是空
+name not like &apos;%en%&apos;;     排除名字中包含en的
+id=10 or name like &apos;%en&apos;;       id是10的或者名字后缀为en的
+id=10 or (id=5 and salary&lt;=2500);    id是10或者id是5且工资小于2500的人</code></pre></li>
 </ol>
 <h2 id="五、mysql的数据类型"><a href="#五、mysql的数据类型" class="headerlink" title="五、mysql的数据类型"></a><font color="#FFA07A" size:5>五、mysql的数据类型</font></h2><p>1.关于数字的<br>  unsigned    无符号，只有正数</p>
 <p>  zerofill    在前面补0</p>
@@ -225,7 +238,110 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
 <p>2.关于字符串的<br>  char<br>  定长字符串，最长不能超过255个字符<br>  char(6)     定长6个字符，<br>              超过6位，可能出错，也可能截断，<br>              不足6位，在后面添加空格</p>
 <p>  varchar     变长字符串，最大65535个字节<br>  varchar(6)<br>              如果指定的最大长度，在255个字节内，在前面会加1个字节，表示字符串的字节长度<br>              最大长度大于255，在前面加2个字节，表示字符串的字节长度<br>  char和varchar区别：<br>    char效率高<br>    varchar效率低，读取时，先读取长度值，再取字符串</p>
 <p>  text        65535个字节<br>  latin1      字符数量：65535<br>  gbk         65535/2 个字符<br>  utf8        65535/3 个字符</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#FFA07A" size:5>总结</font></h2><ol>
+<p>3.关于日期的<br>  datetime       年月日时分秒</p>
+<p>  date           年月日</p>
+<p>  time           时分秒</p>
+<p>  timestamp         时间戳<br>                    时间范围，只到2038年<br>                    第一个timestamp字段，会在修改这行数据时，自动修改成系统当前时间</p>
+<h2 id="六、单引号的作用"><a href="#六、单引号的作用" class="headerlink" title="六、单引号的作用"></a><font color="#FFA07A" size:5>六、单引号的作用</font></h2><ol>
+<li>单引号转义：<br>‘a’b’  错误<br>‘a’’b’   正确，中间的两个单引号，前一个是转义符，最后的输出条件是a’b</li>
+<li>sql注入攻击：<br>1’ or ‘1’ = ‘1      单引号是改变了sql数据结构<br>   select * from 表<br>   where username=’xxx’<br>   and password=’1’ or ‘1’ = ‘1’;</li>
+<li>防止sql注入攻击：<br>1’’ or ‘’1’’ = ‘’1<br>   select * from 表<br>   where username=’xxx’<br>   and password=’1’’ or ‘’1’’ = ‘’1’;</li>
+</ol>
+<h2 id="七、Order-By"><a href="#七、Order-By" class="headerlink" title="七、Order By"></a><font color="#FFA07A" size:5>七、Order By</font></h2><p>select ….from….where…<br>1.order by a                 按a字段升序排列<br>2.order by a,b               按a字段升序排列，a相同，按b升序排<br>3.order by a desc            按a字段降序排列<br>4.order by a desc, b asc     按a字段降序排列，b字段升序排列</p>
+<h2 id="八、字段别名"><a href="#八、字段别名" class="headerlink" title="八、字段别名"></a><font color="#FFA07A" size:5>八、字段别名</font></h2><p><font color="#DA70D6">在where中不能用，order by 中能用</font><br>字段别名是给字段或者表达式起的，表名也可以有别名<br>        select id,name,salary<br>               salary<em>12 sal<br>        from 表<br>        where salary</em>12 &gt;=1000<br>        order by sal desc;</p>
+<h2 id="九、mysql的函数"><a href="#九、mysql的函数" class="headerlink" title="九、mysql的函数"></a><font color="#FFA07A" size:5>九、mysql的函数</font></h2><p><font color="#DA70D6">1. 字符串函数</font><br>写在where子句中<br>char_length(‘ ‘) - 字符数<br>        char_length(first_name)=char_length(first_name);<br>length(‘ ‘) - 字节数 </p>
+<p>concat(‘a’,’b’,’cde’,’fff’) - 字符串连接<br>lpad(‘准备填充的字符串’, 填充后字符串长度, ‘填充字符串，用来粘贴到准备填充的字符串的左边，可选参数’) - 左侧填充，指定长度比源字符串少，相当于left<br>rpad(‘abc’, 8, ‘*’) - 右侧填充，指定长度比源字符串少，相当于left<br>        select<br>        concat(lpad(first_name,20,’ ‘),’ ‘,last_name)<br>        from 表<br>        order by first_name;<br>concat_ws(‘;’,’abc’,’def’,’ggg’) - 用分隔符连接字符串   </p>
+<p>instr(‘abcdefgdef’,’def’) - 返回第一个子串的位置，从1开始，找不到返回0 </p>
+<p>locate(‘abc’, ‘—abc—abc—abc-‘) - 返回第一个子串的位置，从1开始，找不到返回0<br>locate(‘abc’, ‘—abc—abc—abc-‘,5) - 从指定位置向后找 </p>
+<p>insert(‘abcdefghijkl’,2, 9, ‘—‘) - 用子串取代从2位置开始的9个字符</p>
+<p>lower(‘AdFfLJf’) - 变为小写<br>upper(‘AdFfLJf’) - 变为大写 </p>
+<p>left(‘AdFfLJf’,3) - 返回最左边的三个字符<br>right(‘AdFfLJf’,3) - 返回最右边的三个字符<br>substring(‘abcdefghijklmn’, 3) - 从3位置开始的所有字符<br>substring(‘abcdefghijklmn’, 3, 6) - 从第3个字符开始取6位<br>        substring(first_name,1,1)=substring(last_name,1,1);    //first_name和last_name首字母相同的<br>        left(first_name,1)=left(last_name,1)  //此例与上述等式相同，返回最左边的第1个字符</p>
+<p>trim(‘  a  bc   ‘) - 去除两端空格</p>
+<p>repeat(‘abc’, 3) - 重复三遍abc </p>
+<p>replace(‘Hello MySql’,’My’,’Your’) - 子串替换<br>        email&lt;&gt;concat(left(first_name,1),<br>        replace(last_name,’ ‘,’ ‘));    //email不符合规则的话，first_name首字母连接last_name<br>reverse(‘Hello’) - 翻转字符串 </p>
+<p>space(10) - 返回10个空格</p>
+<p><font color="#DA70D6">2. 数字函数</font><br>ceil(3.94) - 向上取整</p>
+<p>floor(3.94) - 向下取整</p>
+<p>round(673.4974) - 四舍五入</p>
+<p>round(673.4974, 2) - 四舍五入到小数点后2位</p>
+<p>round(673.4974, -2) - 四舍五入到百</p>
+<p>truncate(234.39, 1) - 舍去至小数点后1位，必须指定位数</p>
+<p>format(391.536, 2) - 数字格式化为字符串，###,###.###，四舍五入，第二个参数为小数位数<br>        format(now(),’%Y_%M_%D’)<br>rand() - 随机浮点数,[0,1)<br>        select *from 表 order by rand();</p>
+<p><font color="#DA70D6">3. 日期函数</font><br>日期字符串格式符合mysql的默认格式 ‘2018-3-15’，可以与日期类型数据之间自动转换</p>
+<p>now()   返回当前的日期和时间 </p>
+<p>curdate()   返回当前的日期<br>curtime()   返回当前的时间 </p>
+<p>date(时间)   提取日期或日期/时间表达式的日期部分<br>time(时间)    提取日期或日期/时间表达式的时间部分 </p>
+<p>extract(字段 From 日期)   返回日期/时间的单独部分<br>  字段的合法值：<br>    microsecond<br>    second_microsecond<br>    second<br>    minute_microsecond<br>    minute<br>    minute_second<br>    hour<br>    hour_microsecond<br>    hour_second<br>    hour_minute<br>    day<br>    day_second<br>    day_minute<br>    day_hour<br>    week<br>    month<br>    quarter<br>    year<br>    year_month<br>    dd</p>
+<p>DATE_ADD(日期, interval 数量 字段)   给日期添加指定的时间间隔 字段的合法值同上</p>
+<p>DATE_SUB(日期, interval 数量 字段)   从日期减去指定的时间间隔 </p>
+<p>DATEDIFF(日期1, 日期2)   返回两个日期之间的天数 </p>
+<p>DATE_FORMAT(日期, 格式)   用不同的格式显示日期/时间 </p>
+<pre><code>格式字符：  
+%Y-%m-%d %H:%i:%s 
+%d/%m/%Y 
+%Y年%m月%d日 
+%a  缩写星期名 
+%b  缩写月名 
+%c  月，数值 
+%D  带有英文前缀的月中的天 
+%d  月的天，数值(00-31) 
+%e  月的天，数值(0-31) 
+%f  微秒 
+%H  小时 (00-23) 
+%h  小时 (01-12) 
+%I  小时 (01-12) 
+%i  分钟，数值(00-59) 
+%j  年的天 (001-366) 
+%k  小时 (0-23) 
+%l  小时 (1-12) 
+%M  月名 
+%m  月，数值(00-12) 
+%p  AM 或 PM 
+%r  时间，12-小时（hh:mm:ss AM 或 PM） 
+%S  秒(00-59) 
+%s  秒(00-59) 
+%T  时间, 24-小时 (hh:mm:ss) 
+%U  周 (00-53) 星期日是一周的第一天 
+%u  周 (00-53) 星期一是一周的第一天 
+%V  周 (01-53) 星期日是一周的第一天，与 %X 使用 
+%v  周 (01-53) 星期一是一周的第一天，与 %x 使用 
+%W  星期名 
+%w  周的天 （0=星期日, 6=星期六） 
+%X  年，其中的星期日是周的第一天，4 位，与 %V 使用 
+%x  年，其中的星期一是周的第一天，4 位，与 %v 使用 
+%Y  年，4 位 
+%y  年，2 位 </code></pre><p>LAST_DAY(日期) - 返回当月最后一天</p>
+<p><font color="#DA70D6">4. null值函数</font><br>1.ifnull(1, 2)<br>   1是null,取2<br>   1不是null,就取1<br>        select<br>        id,name,salary,<br>        salary<em>12</em>(1+ifnull(字段1,字段2)) sal<br>        from employees;<br>2.coalescs(1,2,3,4,5,6,7….)<br>    获取第一个非空值</p>
+<p><font color="#DA70D6">5. 加密函数</font><br>md5()<br> 单向加密，不能解密<br> 任何数据，加密成32位16进制字符<br> 一般用来加密保存用户密码</p>
+<p>sha()<br> 单向加密，不能解密<br> 任何数据，加密成40位16进制字符</p>
+<pre><code>insert into user(username,password)
+values
+(&apos;用户名1&apos;,md5(&apos;用户密码1&apos;)),
+(&apos;用户名2&apos;,md5(&apos;用户密码2&apos;));</code></pre><p><font color="#DA70D6">6.分支</font><br>（1）if(1,2,3)<br>     1是真，返回2  ；  1是假，返回3</p>
+<p>（2）case<br>     when 条件1 then ….<br>     when 条件2 then ….<br>     else …<br>     end</p>
+<p>（3）case 字段或表达式<br>     when 值1 then ….<br>     when 值2 then ….<br>     else …<br>     end</p>
+<p><font color="#DA70D6">7. 多行函数（聚合函数）</font><br>sum()    avg()    max()    min()     count()</p>
+<p>（1）不能和其他普通字段一起查询</p>
+<pre><code>   select avg(salary),employee_id,first_name
+   from 表;
+
+其他数据库会禁止直行，mysql可以执行，只是把第一条数据显示出来
+   select
+   sum(salary),avg(salary),
+   max(salary),min(salary),
+   count(salary)
+   from 表;</code></pre><p>（2）多行函数可以一起查询，并且忽略null值</p>
+<p>（3）count(a)对指定字段的值计数，重复值会重复计数，可用distinct去除重复</p>
+<pre><code>select count(distinct job_id)
+from 表;     //有多少工作岗位</code></pre><p>（4）count(*) 计算行数</p>
+<p><font color="#DA70D6">8. group by 分组计算多行函数</font><br>按指定字段，相同的值，分组计算<br> group by a，  按a字段相同值分组<br> group by a,b，   按a,b字段组合相同值分组<br> 只有求多行函数时，才用group by<br> 分组字段，可以和多行函数一起查询<br>        每个部门中，每个岗位的人数，按人数排序<br>        select department_id,job_id,count(*) c<br>        from 表<br>        where department_id is not null<br>        group by department_id,job_id<br>        order by c;</p>
+<p><font color="#DA70D6">9. having子句，对分组函数结果过滤</font><br>    where 最先执行，只能过滤普通条件<br>    having 分组计算完多行函数后，执行过滤。必须在group by 后面<br>    （1）只有一个手下的主管<br>        select manager_id, count(*) c<br>        from 表<br>        where manager_id is not null<br>        group by manager_id<br>        having c=1;</p>
+<pre><code>（2）平均工资大于8000的工作岗位
+    select job_id,avg(salary) s
+    from 表
+    group by job_id
+    having s&gt;8000
+    order by s desc;</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#FFA07A" size:5>总结</font></h2><ol>
 <li><p>sql语句执行顺序<br>from 子句   ，组装不同数据源的数据（如各种表格等等）<br>where       ，指定条件对记录筛选<br>group by    ，将数据划分为多个组<br>使用聚合函数计算的sql语句<br>having      ，筛选分组<br>计算所有的表达式<br>order by    ，对结果集排序</p>
 </li>
 <li><p>数据库执行计划<br>sql语句发送到数据库，要翻译成执行计划，利用执行计划执行实现<br>数据库在执行完全一样的sql语句时会重用相同的执行计划<br>有 ？ 参数的sql语言会重用相同的执行计划</p>
@@ -235,7 +351,7 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxptljo900020owavqe39b9u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxpz9gub0002ykwafbk9rihy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +424,7 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxptljmb00010owaxj3y2fs1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjxpz9gtq0001ykwap4ibqqm8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -357,7 +473,7 @@ show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxptljke00000owau1dbjrwd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjxpz9gtd0000ykwamdptrij9" class="article-share-link">Share</a>
       
       
     </footer>

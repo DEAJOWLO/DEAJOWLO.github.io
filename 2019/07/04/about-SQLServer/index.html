@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="关于数据库知识点的整理搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间 &amp;nbsp;&amp;nbsp;我用的是MariaDB，所以可能会与MySql有所出入，但大体是不会有任何影响的。无非就是MySql中设置default时，必须用字母，但Marai">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-05T07:18:19.511Z">
+<meta property="og:updated_time" content="2019-07-05T07:55:41.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="about SQLServer">
 <meta name="twitter:description" content="关于数据库知识点的整理搞开发的人员对于数据库的管理必须要精通，尤其是大数据开发这块，可能很多时候弄了半天才发现，原来只是某个sql语言写错了在这里我将我学到的数据库基础都整理出来，希望能够在日后的学习中，省去一大半查资料的时间 &amp;nbsp;&amp;nbsp;我用的是MariaDB，所以可能会与MySql有所出入，但大体是不会有任何影响的。无非就是MySql中设置default时，必须用字母，但Marai">
@@ -137,7 +137,32 @@
 <li>慎用in 和 not in ，可用exists代替in</li>
 <li>避免在where语句中对字段进行表达式和函数操作</li>
 </ol>
-<h2 id="二、索引"><a href="#二、索引" class="headerlink" title="二、索引"></a><font color="#FFA07A" size:5>二、索引</font></h2><p>1.为什么要创建索引<br>   假设有未创建索引的表t1,t2,t3，分别只包含c1，c2，c3列，每张表有1000行数据，让你做对应值相等的查询<br>   用select c1,c2,c3 from t1,t2,t3 where c1=c2 and c1=c3<br>   查询结果就是1000行，每行3个相等值，没有索引的话，可能的结果就是1000<em>1000</em>1000<br>   但若对表建立索引，就可以从表t1的第一行查，使用t2的索引，可定位到t2=t1的行，然后同样用在t3上，这样重复下去，只需要遍历t1的行就可以了。<br>2.建索引原则<br>   要在大数据量的表上建立<br>   在where子句或连接条件上常引用的列上建立<br>   需要多表查询时建立<br>   <font color="#DA70D6">很少或不引用的字段和逻辑型字段，如男或女、是或否 等不建立</font><br>3.创建索引<br>   （1）可在执行create table 语句时创建<br>         create table 表名(<br>         字段名 字段类型 index/primary key/unique<br>         )engine=innodb charset=utf8;<br>   （2）也可单独使用create index<br>        <font color="#DA70D6">create index 可对表增加普通索引或unique索引,不能创建primary key索引</font><br>        create index 索引名 on 表名(字段)<br>        或<br>        create unique index on 表名(字段)<br>   （3）也可以单独使用alter table 来创建普通索引、unique、primary key索引<br>        alter table 表名 add index 索引名(字段)<br>        或<br>        alter table 表名 add unique(字段)<br>        或<br>        alter table 表名 add primary key(字段)<br>   （4）删除索引<br>        drop index 索引名 on 表名<br>        或<br>        alter table 表名 drop index 索引名<br>        或<br>        alter table 表名 drop primary key/unique<br>   （5）查看索引<br>        show index from 表名<br>        或<br>        show keys from 表名<br>   （6）索引与约束的区别</p>
+<h2 id="二、索引"><a href="#二、索引" class="headerlink" title="二、索引"></a><font color="#FFA07A" size:5>二、索引</font></h2><ol>
+<li><p>为什么要创建索引<br>假设有未创建索引的表t1,t2,t3，分别只包含c1，c2，c3列，每张表有1000行数据，让你做对应值相等的查询<br>用select c1,c2,c3 from t1,t2,t3 where c1=c2 and c1=c3<br>查询结果就是1000行，每行3个相等值，没有索引的话，可能的结果就是1000<em>1000</em>1000<br>但若对表建立索引，就可以从表t1的第一行查，使用t2的索引，可定位到t2=t1的行，然后同样用在t3上，这样重复下去，只需要遍历t1的行就可以了。</p>
+</li>
+<li><p>建索引原则<br>要在大数据量的表上建立<br>在where子句或连接条件上常引用的列上建立<br>需要多表查询时建立<br><font color="#DA70D6">很少或不引用的字段和逻辑型字段，如男或女、是或否 等不建立</font></p>
+</li>
+<li><p>创建索引<br>（1）可在执行create table 语句时创建</p>
+<pre><code>create table 表名( 
+字段名 字段类型 index/primary key/unique
+)engine=innodb charset=utf8;</code></pre><p>（2）也可单独使用create index</p>
+<pre><code>&lt;font color=#DA70D6&gt;create index 可对表增加普通索引或unique索引,不能创建primary key索引&lt;/font&gt;
+create index 索引名 on 表名(字段)
+或
+create unique index on 表名(字段)</code></pre><p>（3）也可以单独使用alter table 来创建普通索引、unique、primary key索引</p>
+<pre><code>alter table 表名 add index 索引名(字段)
+或
+alter table 表名 add unique(字段)
+或
+alter table 表名 add primary key(字段)</code></pre><p>（4）删除索引</p>
+<pre><code>drop index 索引名 on 表名
+或
+alter table 表名 drop index 索引名
+或
+alter table 表名 drop primary key/unique</code></pre><p>（5）查看索引</p>
+<pre><code>show index from 表名
+或
+show keys from 表名</code></pre><p>（6）索引与约束的区别</p>
 <table>
 <thead>
 <tr>
@@ -162,9 +187,19 @@
 <td align="center">可以被当做数据库对象来处理</td>
 </tr>
 </tbody></table>
-<h2 id="在数据库条件查询时速度很慢该如何优化"><a href="#在数据库条件查询时速度很慢该如何优化" class="headerlink" title="在数据库条件查询时速度很慢该如何优化:"></a>在数据库条件查询时速度很慢该如何优化:</h2><p>1.建索引<br>2.减少表关联<br>3.优化sql，尽量让sql用索引定位，不要全表查询<br>4.简化查询字段，没有的字段不要，尽量返回少量数据<br>5.利用分页查询减少返回的数据量</p>
-<h2 id="三、分页查询"><a href="#三、分页查询" class="headerlink" title="三、分页查询"></a><font color="#FFA07A" size:5>三、分页查询</font></h2><p>分页查询方式：<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;<br>   distinct 表示去重，这种方式易丢失数据<br>       select distinct 字段 from 表 order by 字段 desc limit 10;<br>       select distinct 字段 from 表 where 字段 &lt; $last_min_字段 order by 字段 desc limit 10;<br>   $last_min_字段表示最后一个字段，这种方式没有命中唯一索引，而是一般索引，需要group by<br>       select 字段 from 表 group by 字段 order by 字段 desc limit 10;<br>       select 字段 from 表 group by 字段 having 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</p>
-<h2 id="四、一些关于表的基础sql语句"><a href="#四、一些关于表的基础sql语句" class="headerlink" title="四、一些关于表的基础sql语句"></a><font color="#FFA07A" size:5>四、一些关于表的基础sql语句</font></h2><ol>
+</li>
+</ol>
+<h2 id="在数据库条件查询时速度很慢该如何优化"><a href="#在数据库条件查询时速度很慢该如何优化" class="headerlink" title="在数据库条件查询时速度很慢该如何优化:"></a>在数据库条件查询时速度很慢该如何优化:</h2><ol>
+<li>建索引</li>
+<li>减少表关联</li>
+<li>优化sql，尽量让sql用索引定位，不要全表查询</li>
+<li>简化查询字段，没有的字段不要，尽量返回少量数据</li>
+<li>利用分页查询减少返回的数据量</li>
+</ol>
+<h2 id="三、分页查询"><a href="#三、分页查询" class="headerlink" title="三、分页查询"></a><font color="#FFA07A" size:5>三、分页查询</font></h2><p>分页查询方式：<br>       select distinct 字段 from 表名 order by 字段 desc limit 0，10;</p>
+<pre><code>select distinct 字段 from 表名 order by 字段 desc limit 0，10;</code></pre><p>   distinct 表示去重，这种方式易丢失数据<br>       select distinct 字段 from 表 order by 字段 desc limit 10;</p>
+<pre><code>select distinct 字段 from 表 where 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</code></pre><p>   $last_min_字段表示最后一个字段，这种方式没有命中唯一索引，而是一般索引，需要group by<br>       select 字段 from 表 group by 字段 order by 字段 desc limit 10;</p>
+<pre><code>select 字段 from 表 group by 字段 having 字段 &lt; $last_min_字段 order by 字段 desc limit 10;</code></pre><h2 id="四、一些关于表的基础sql语句"><a href="#四、一些关于表的基础sql语句" class="headerlink" title="四、一些关于表的基础sql语句"></a><font color="#FFA07A" size:5>四、一些关于表的基础sql语句</font></h2><ol>
 <li>添加字段：<br> alter table 表 add 字段 first;   //first指添加字段到第一个<br> alter table 表 add 字段 after 某字段;<br> alter table 表 add (字段1，字段2);</li>
 <li>修改字段：<br> alter table 表 modify 字段 字段新类型 新内容;</li>
 <li>调整字段顺序：<br> alter table 表 modify 字段 字段类型 first;  //将字段放在第一个<br> alter table 表 modify 字段 字段类型 after 某字段;   //将字段放在某字段后</li>
@@ -174,10 +209,24 @@
 <li>删除数据：<br> <font color="blue">delete from 表 where 字段=” “;</font></li>
 <li>修改数据：<br> <font color="blue">update 表 set 字段1=” “,字段2=” “ where 字段3=” “;</font></li>
 <li>查询字段：<br> <font color="blue">select 字段 from 表;</font><br> <font color="blue">select 字段1,字段2 from 表;</font><br> <font color="blue">select * from 表 where 字段要求;</font></li>
-<li>添加约束：<br>（1）添加主键约束<br>alter table 表 add primary key(字段1，字段2);  //这里的举例是用字段组合做主键，双主键，一般不用，大部分都只是一个主键<br>（2）添加外键约束<br>create table 表1 (<br>字段1 字段类型 primary key auto_increment);    //<font color="#DA70D6">primary key auto_increment</font><br>create table 表2 (<br>字段2 字段类型，<br>foreign  key(字段2) reference 表1(字段1)<br>);<br>或<br>alter table  表2 add foreign key(字段2) reference 表1(字段1);<br>（3）字段唯一组合约束<br>unique key(字段1，字段2); </li>
+<li>添加约束：<br>（1）添加主键约束<br>alter table 表 add primary key(字段1，字段2);  //这里的举例是用字段组合做主键，双主键，一般不用，大部分都只是一个主键<br>（2）添加外键约束<br>create table 表1 (<br>字段1 字段类型 primary key auto_increment);    //<font color="#DA70D6">primary key auto_increment表示自增主键</font><br>create table 表2 (<br>字段2 字段类型，<br>foreign  key(字段2) reference 表1(字段1)<br>);<br>或<br>alter table  表2 add foreign key(字段2) reference 表1(字段1);<br>（3）字段唯一组合约束<br>unique key(字段1，字段2); </li>
 <li>默认用default<br>注释用comment</li>
 <li>自表数据复制<br>insert into 表(字段) select 字段 from 表;   //把查询结果数据批量插入到一张表</li>
+<li>查询结果创建成表<br>create table 表2<br>as<br>select 字段1，字段2 from 表1;<br>select * from 表2;</li>
+<li>按指定字段排序，并只修改前几行<br>update 表 set 字段1=” “,字段2=” “<br>order by a<br>limit 5;</li>
+<li>指定字段排序，并删除前几行<br>delete from 表<br>order by a<br>limit 5;</li>
+<li>通配符<br>_  单字符<br>%  多字符<br>\转义</li>
+<li>weher子句<br>（1）id=10;<br>id&lt;&gt;10;<br>id&lt;10;</li>
 </ol>
+<h2 id="五、mysql的数据类型"><a href="#五、mysql的数据类型" class="headerlink" title="五、mysql的数据类型"></a><font color="#FFA07A" size:5>五、mysql的数据类型</font></h2><p>1.关于数字的<br>  unsigned    无符号，只有正数</p>
+<p>  zerofill    在前面补0</p>
+<p>  tinyint     1字节<br>  smallint    2字节<br>  int         4字节<br>  int(5)      <font color="#DA70D6">查询结果被显示时，不足5位，按5位显示，配合参数 zerofill 参数，可以在前面补0不足5位</font><br>  bigint      8字节</p>
+<p>  float       4字节，单精度</p>
+<p>  double      8字节，双精度</p>
+<p>  decimal(m,n)    定点数，固定长度的小数位；整数m-n位，小数n位，总共m位<br>  decimal(6,4)    整数位2位，小数位4位，一共6位</p>
+<p>2.关于字符串的<br>  char<br>  定长字符串，最长不能超过255个字符<br>  char(6)     定长6个字符，<br>              超过6位，可能出错，也可能截断，<br>              不足6位，在后面添加空格</p>
+<p>  varchar     变长字符串，最大65535个字节<br>  varchar(6)<br>              如果指定的最大长度，在255个字节内，在前面会加1个字节，表示字符串的字节长度<br>              最大长度大于255，在前面加2个字节，表示字符串的字节长度<br>  char和varchar区别：<br>    char效率高<br>    varchar效率低，读取时，先读取长度值，再取字符串</p>
+<p>  text        65535个字节<br>  latin1      字符数量：65535<br>  gbk         65535/2 个字符<br>  utf8        65535/3 个字符</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#FFA07A" size:5>总结</font></h2><ol>
 <li><p>sql语句执行顺序<br>from 子句   ，组装不同数据源的数据（如各种表格等等）<br>where       ，指定条件对记录筛选<br>group by    ，将数据划分为多个组<br>使用聚合函数计算的sql语句<br>having      ，筛选分组<br>计算所有的表达式<br>order by    ，对结果集排序</p>
 </li>
@@ -188,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxprw4fl00021gwaeprmuiuf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjxptljo900020owavqe39b9u" class="article-share-link">Share</a>
       
       
     </footer>

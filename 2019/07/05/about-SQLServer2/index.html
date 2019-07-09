@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>about-SQLServer2 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="About SQLServer 2续 about-SQLServer由于上一张博客信息量过大，所以这次是上一张的延续。 首先来回顾下上一张博客学到的内容 索引（创建、删除、查看） sql的执行顺序select…from…where..group by …多行函数计算having…计算所有的表达式order by.. 约束 关于修改表格字段的sql语句alter table …add/change/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about-SQLServer2">
+<meta property="og:url" content="http://yoursite.com/2019/07/05/about-SQLServer2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="About SQLServer 2续 about-SQLServer由于上一张博客信息量过大，所以这次是上一张的延续。 首先来回顾下上一张博客学到的内容 索引（创建、删除、查看） sql的执行顺序select…from…where..group by …多行函数计算having…计算所有的表达式order by.. 约束 关于修改表格字段的sql语句alter table …add/change/">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/.com//%E5%A4%9A%E8%A1%A8%E8%BF%9E%E6%8E%A5.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//%E5%90%84%E8%BF%9E%E6%8E%A5%E5%BD%A2%E8%B1%A1%E5%9B%BE.PNG">
+<meta property="og:updated_time" content="2019-07-09T14:38:46.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about-SQLServer2">
+<meta name="twitter:description" content="About SQLServer 2续 about-SQLServer由于上一张博客信息量过大，所以这次是上一张的延续。 首先来回顾下上一张博客学到的内容 索引（创建、删除、查看） sql的执行顺序select…from…where..group by …多行函数计算having…计算所有的表达式order by.. 约束 关于修改表格字段的sql语句alter table …add/change/">
+<meta name="twitter:image" content="http://yoursite.com/.com//%E5%A4%9A%E8%A1%A8%E8%BF%9E%E6%8E%A5.PNG">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-about-SQLServer2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/05/about-SQLServer2/" class="article-date">
+  <time datetime="2019-07-05T11:26:24.000Z" itemprop="datePublished">2019-07-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      about-SQLServer2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="About-SQLServer-2"><a href="#About-SQLServer-2" class="headerlink" title="About SQLServer 2"></a>About SQLServer 2</h2><h1 id="续-about-SQLServer"><a href="#续-about-SQLServer" class="headerlink" title="续 about-SQLServer"></a>续 about-SQLServer</h1><p>由于上一张博客信息量过大，所以这次是上一张的延续。</p>
+<h2 id="首先来回顾下上一张博客学到的内容"><a href="#首先来回顾下上一张博客学到的内容" class="headerlink" title="首先来回顾下上一张博客学到的内容"></a>首先来回顾下上一张博客学到的内容</h2><ol>
+<li>索引（创建、删除、查看）</li>
+<li>sql的执行顺序<br>select…<br>from…<br>where..<br>group by …<br>多行函数计算<br>having…<br>计算所有的表达式<br>order by..</li>
+<li>约束</li>
+<li>关于修改表格字段的sql语句<br>alter table …add/change/modify..<br>删除表格<br>drop table if exists 表名;</li>
+<li>关于修改表格数据的sql语句<br>insert into..values( );<br>delete from..where<br>update…set…where..<br>select..from..<br>select*from….where..</li>
+<li>where子句</li>
+<li>sql注入攻击和防止注入攻击<br>1’ or ‘1’ = ‘1<br>1’’ or ‘’1’’ = ‘’1</li>
+<li>字符串函数、数字函数、null值函数、加密函数、多行函数</li>
+<li>group by 制定字段分组<br>having子句，对分组函数过滤</li>
+</ol>
+<p>接下来我们就来讲一些中等级别的sql操作。</p>
+<h2 id="一、子查询（嵌套查询）"><a href="#一、子查询（嵌套查询）" class="headerlink" title="一、子查询（嵌套查询）"></a><font color="#006400">一、子查询（嵌套查询）</font></h2><p>这是一般项目中最常用到的，也是非常重要的知识点<br><font color="#FF8C00">1.条件子查询（一个查询的结果作另一个查询的过滤条件）</font><br>        select..from…<br>        where a=(select…)<br>        //单值用 = 、 &lt;&gt; 、 &gt; 、 &lt;<br>        //多值用 in 、&gt;all 、 &gt;any<br>        //多列子查询： where(a,b)=(select x,y from..)<br>                       where(a,b) in (select x,y from..)<br><font color="#008B8B">注意了，因为后面的代码都是比较繁琐的，我建议先打开记事本，在记事本里预先写好代码了，再往cmd里运行</font><br>如：（1）拿最低工资的所有员工    先求最低工资，用最低工资查询员工<br>        select min(salary) from 表;</p>
+<pre><code>select
+id,name,salary
+from 表
+where salary=(
+
+    select min(salary) from 表
+
+);</code></pre><p>   （2）工资低于平均工资的员工    先求平均工资，用平均工资，过滤员工<br>        select avg(salary) from 表;</p>
+<pre><code>select
+id, name, salary
+from 表
+where salary&lt;(
+
+    select avg(salary) from employees
+
+)
+order by salary desc;</code></pre><p>   （3）只有一个人的部门中的员工   先分组查询只有一人的部门id，再用部门id，过滤员工</p>
+<pre><code>select department_id
+from 表
+where department_id is not null
+group by department_id
+having count(*)=1;
+
+select
+id,name,salary,department_id
+from 表
+where department_id in(
+
+    select department_id
+    from 表
+    where department_id is not null
+    group by department_id
+    having count(*)=1
+
+    );</code></pre><p>   （4）每个部门中，拿最低工资的员工   先分组求最低工资，再用部门id和工资值，过滤员工<br>        select department_id,min(salary)<br>        from 表<br>        where department_id is not null<br>        group by department_id;</p>
+<pre><code>select
+id,name,department_id,salary
+from 表
+where (department_id,salary) in(
+
+    select department_id,min(salary)
+    from 表
+    where department_id is not null
+    group by department_id
+
+    )
+order by department_id;</code></pre><p><font color="#FF8C00">2.from子查询 行内视图（从一个查询的结果中，再查询。mysql行内视图，必须起别名）</font><br>        select … from (select …) t<br>如：（1）求手下人数最多的主管id   先分组求人数，然后获得最大人数值，再重新分组求人数，用人数过滤主管id<br>        select manager_id,count(*) c<br>        from 表<br>        where manager_id is not null<br>        group by manager_id;</p>
+<pre><code>select max(c) from (
+select manager_id,count(*) c
+from 表
+where manager_id is not null
+group by manager_id
+) t;
+
+select manager_id
+from 表
+where manager_id is not null
+group by manager_id
+having count(*)=(
+    select max(c) from (
+    select manager_id,count(*) c
+    from 表
+    where manager_id is not null
+    group by manager_id
+    ) t
+);
+
+//再根据上面的查询，再进一步，查询这个主管的信息
+select
+id,name,salary
+from 表
+where employee_id=(
+    select manager_id
+    from 表
+    where manager_id is not null
+    group by manager_id
+    having count(*)=(
+        select max(c) from (
+            select manager_id,count(*) c
+            from 表
+            where manager_id is not null
+            group by manager_id
+            ) t
+        )
+);</code></pre><p>   （2）求平均工资最低的岗位员工信息   先求每个岗位的平均工资，再求最小平均工资，然后求最小平均工资的岗位，用岗位过滤员工<br>        select job_id,avg(salary) a<br>        from 表<br>        group by job_id; //求平均工资</p>
+<pre><code>select min(a) from (
+select job_id,avg(salary) a
+from 表
+group by job_id
+) t;  //求最小平均工资
+
+select job_id,avg(salary) a
+from 表
+group by job_id
+having a=(
+    select min(a) from (
+    select job_id,avg(salary) a
+    from 表
+    group by job_id
+    ) t
+);  //求最小平均工资的岗位
+
+select
+id,name,salary,job_id
+from 表 
+where job_id in(
+    select job_id
+    from 表
+    group by job_id
+    having avg(salary)=(
+
+        select min(a) from (
+        select job_id,avg(salary) a
+        from 表
+        group by job_id
+        ) t
+
+    ) 
+);  //用岗位再求出员工信息</code></pre><p><font color="#FF8C00">3.字段子查询（子查询的结果， 作为外面查询结果的一列）</font><br>        select a,b,c,(select …) c from …<br>如：<br>        select<br>        id,name,salary,  //<font color="#008B8B">注意了，这里有个逗号，是查询结果</font><br>        (select avg(salary) from 表) avg_sal<br>        from 表;</p>
+<h2 id="二、Union联合查询"><a href="#二、Union联合查询" class="headerlink" title="二、Union联合查询"></a><font color="#006400">二、Union联合查询</font></h2><p>将多个查询的结果，组合成一个查询结果<br>        (select …) union (select …)<br><font color="#008B8B">注意了，字段列表数量必须相同</font><br>union   去除重复行<br>union all    不去除重复行<br>如：（1）最早入职的5人，和最晚入职的5人<br>        (select<br>        id,name,salary,hire_date<br>        from 表<br>        order by hire_date limit 5)</p>
+<pre><code>union
+
+(select id,name,salary,hire_date
+from 表
+order by hire_date desc limit 5)
+
+order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三、多表连接查询" class="headerlink" title="三、多表连接查询"></a><font color="#006400">三、多表连接查询</font></h2><p><img src="/.com//%E5%A4%9A%E8%A1%A8%E8%BF%9E%E6%8E%A5.PNG" alt="多表连接"><br>直接莽过来就是代码吧<br>如：（1）查询员工信息，附带显示部门名<br>        select<br>        e.id,e.name,e.salary,<br>        d.department_id,d.department_name<br>        from<br>        employees e, departments d<br>        where<br>        e.department_id=d.department_id;</p>
+<p>   （2）查询部门和部门所在的城市<br>        select<br>        d.department_id,d.department_name,<br>        l.city<br>        from departments d, locations l<br>        where d.location_id=l.location_id;</p>
+<p>   （3）’Finance’财务部的人数<br>        select  count(*)<br>        from employees e, departments d<br>        where e.department_id=d.department_id<br>        and d.department_name=’Finance’;</p>
+<p><font color="#FF8C00">·1.外连接</font><br>内连接：只查询符合连接条件的数据<br>外连接：连接条件以外的数据，也要查询出来</p>
+<p>非标准sql表连接语法，不同数据库，外连接语法不同<br>    a.c1 <em>= b.c2<br>    a.c1 =</em> b.c2<br>    a.c1(+) = b.c2<br>    a.c1 = b.c2(+)<br>    mysql 没有非标准外连接语法<br>    mysql 只能用标准语法做外连接查询<br><img src="/.com//%E5%90%84%E8%BF%9E%E6%8E%A5%E5%BD%A2%E8%B1%A1%E5%9B%BE.PNG" alt="各连接形象图"><br><font color="#FF8C00">·2.sql标准表连接语法</font></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/05/about-SQLServer2/" data-id="cjxvx74sj000218wanysd9pya" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/04/about-SQLServer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">about SQLServer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/05/about-SQLServer2/">about-SQLServer2</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/04/about-SQLServer/">about SQLServer</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/">The First Day of DEAJOWLO Using node js create blog</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/02/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

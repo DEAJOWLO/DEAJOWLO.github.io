@@ -224,11 +224,13 @@ where job_id in(
 from 表
 order by hire_date desc limit 5)
 
-order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三、多表连接查询" class="headerlink" title="三、多表连接查询"></a><font color="#006400">三、多表连接查询</font></h2><p><img src="/.com//%E5%A4%9A%E8%A1%A8%E8%BF%9E%E6%8E%A5.PNG" alt="多表连接"><br>直接莽过来就是代码吧<br>如：（1）查询员工信息，附带显示部门名<br>        select<br>        e.id,e.name,e.salary,<br>        d.department_id,d.department_name<br>        from<br>        employees e, departments d<br>        where<br>        e.department_id=d.department_id;</p>
+order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三、多表连接查询" class="headerlink" title="三、多表连接查询"></a><font color="#006400">三、多表连接查询</font></h2><p><img src="/.com//MuchTableLink.PNG" alt="多表连接"><br>直接莽过来就是代码吧<br>如：（1）查询员工信息，附带显示部门名<br>        select<br>        e.id,e.name,e.salary,<br>        d.department_id,d.department_name<br>        from<br>        employees e, departments d<br>        where<br>        e.department_id=d.department_id;</p>
 <p>   （2）查询部门和部门所在的城市<br>        select<br>        d.department_id,d.department_name,<br>        l.city<br>        from departments d, locations l<br>        where d.location_id=l.location_id;</p>
 <p>   （3）’Finance’财务部的人数<br>        select  count(*)<br>        from employees e, departments d<br>        where e.department_id=d.department_id<br>        and d.department_name=’Finance’;</p>
 <p><font color="#FF8C00">1.外连接</font><br>内连接：只查询符合连接条件的数据<br>外连接：连接条件以外的数据，也要查询出来</p>
-<p>非标准sql表连接语法，不同数据库，外连接语法不同<br>    a.c1 <em>= b.c2<br>    a.c1 =</em> b.c2<br>    a.c1(+) = b.c2<br>    a.c1 = b.c2(+)<br>    mysql 没有非标准外连接语法<br>    mysql 只能用标准语法做外连接查询<br><img src="/.com//%E5%90%84%E8%BF%9E%E6%8E%A5%E5%BD%A2%E8%B1%A1%E5%9B%BE.PNG" alt="各连接形象图"><br><font color="#FF8C00">2.sql标准表连接语法</font><br>（1）内连接<br>    select …<br>    from<br>    a inner join b on(连接条件)</p>
+<p>非标准sql表连接语法，不同数据库，外连接语法不同<br>    a.c1 <em>= b.c2<br>    a.c1 =</em> b.c2<br>    a.c1(+) = b.c2<br>    a.c1 = b.c2(+)<br>    mysql 没有非标准外连接语法<br>    mysql 只能用标准语法做外连接查询</p>
+<img src="/.com//EveryLinkPhoto.PNG" class="[各连接形象图]">
+<p><img src="/.com//EveryLinkPhoto.PNG" alt="各连接形象图"><br><font color="#FF8C00">2.sql标准表连接语法</font><br>（1）内连接<br>    select …<br>    from<br>    a inner join b on(连接条件)</p>
 <p>（2）左外连接<br>    select …<br>    from<br>    a left outer join b on(连接条件)</p>
 <p>（3）右外连接<br>    select …<br>    from<br>    a right outer join b on(连接条件)</p>
 <p>（4）全外连接(mysql是不支持的)<br>    select …<br>    from<br>    a full outer join b on(连接条件)<br>如：（1）107个员工，显示主管名<br>        select e1.employee_id,e1.first_name,<br>        e1.salary,e2.first_name mgr<br>        from employees e1 left join employees e2<br>        on(e1.manager_id=e2.employee_id);</p>
@@ -238,7 +240,7 @@ order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/about-SQLServer2/" data-id="cjy8sr51e0002cowagl9il53i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/about-SQLServer2/" data-id="cjy8tezc70002z8wahu2wtt5h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +539,7 @@ from 表;     //有多少工作岗位</code></pre><p>（4）count(*) 计算行�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjy8sr51p0003cowagtu0ncn0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/about-SQLServer/" data-id="cjy8tezci0003z8walp9zehhx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,7 +612,7 @@ from 表;     //有多少工作岗位</code></pre><p>（4）count(*) 计算行�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjy8sr50n0000cowad6njwan1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/03/The-First-Day-of-DEAJOWLO-Using-node-js-create-blog/" data-id="cjy8tezbg0000z8wa87mlzz9v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -659,7 +661,7 @@ from 表;     //有多少工作岗位</code></pre><p>（4）count(*) 计算行�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjy8sr50x0001cowar8k8qwcj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/hello-world/" data-id="cjy8tezbs0001z8wafiz3t6g1" class="article-share-link">Share</a>
       
       
     </footer>

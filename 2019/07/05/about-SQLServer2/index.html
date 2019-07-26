@@ -15,8 +15,7 @@
 <meta property="og:description" content="续 about-SQLServer由于上一张博客信息量过大，所以这次是上一张的延续。 首先来回顾下上一张博客学到的内容 索引（创建、删除、查看） sql的执行顺序select…from…where..group by …多行函数计算having…计算所有的表达式order by.. 约束 关于修改表格字段的sql语句alter table …add/change/modify..删除表格drop">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/DEAJOWLO/DEAJOWLOBlogImage/commit/b43774ba6d07d7d8e92826c4eaeb3db64c3185c3?short_path=511fd64#diff-511fd643dd1f972aff59ed235a790a32">
-<meta property="og:image" content="https://github.com/DEAJOWLO/DEAJOWLOBlogImage/blob/master/about-SQLServer2/EveryLinkPhoto.PNG">
-<meta property="og:updated_time" content="2019-07-26T19:50:41.067Z">
+<meta property="og:updated_time" content="2019-07-26T20:10:40.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About-SQLServer2">
 <meta name="twitter:description" content="续 about-SQLServer由于上一张博客信息量过大，所以这次是上一张的延续。 首先来回顾下上一张博客学到的内容 索引（创建、删除、查看） sql的执行顺序select…from…where..group by …多行函数计算having…计算所有的表达式order by.. 约束 关于修改表格字段的sql语句alter table …add/change/modify..删除表格drop">
@@ -235,7 +234,7 @@ order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三�
 <p>   （3）’Finance’财务部的人数<br>        select  count(*)<br>        from employees e, departments d<br>        where e.department_id=d.department_id<br>        and d.department_name=’Finance’;</p>
 <p><font color="#FF8C00">1.外连接</font><br>内连接：只查询符合连接条件的数据<br>外连接：连接条件以外的数据，也要查询出来</p>
 <p>非标准sql表连接语法，不同数据库，外连接语法不同<br>    a.c1 <em>= b.c2<br>    a.c1 =</em> b.c2<br>    a.c1(+) = b.c2<br>    a.c1 = b.c2(+)<br>    mysql 没有非标准外连接语法<br>    mysql 只能用标准语法做外连接查询</p>
-<p><img src="https://github.com/DEAJOWLO/DEAJOWLOBlogImage/blob/master/about-SQLServer2/EveryLinkPhoto.PNG" alt="各连接形象图"><br><font color="#FF8C00">2.sql标准表连接语法</font><br>（1）内连接<br>    select …<br>    from<br>    a inner join b on(连接条件)</p>
+<p><font color="#FF8C00">2.sql标准表连接语法</font><br>（1）内连接<br>    select …<br>    from<br>    a inner join b on(连接条件)</p>
 <p>（2）左外连接<br>    select …<br>    from<br>    a left outer join b on(连接条件)</p>
 <p>（3）右外连接<br>    select …<br>    from<br>    a right outer join b on(连接条件)</p>
 <p>（4）全外连接(mysql是不支持的)<br>    select …<br>    from<br>    a full outer join b on(连接条件)<br>如：（1）107个员工，显示主管名<br>        select e1.employee_id,e1.first_name,<br>        e1.salary,e2.first_name mgr<br>        from employees e1 left join employees e2<br>        on(e1.manager_id=e2.employee_id);</p>
@@ -245,7 +244,7 @@ order by hire_date;</code></pre><h2 id="三、多表连接查询"><a href="#三�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/05/about-SQLServer2/" data-id="cjykito4d0002ycwaqk4tswoa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/05/about-SQLServer2/" data-id="cjykjtcgw0002zkwac7uxssgk" class="article-share-link">Share</a>
       
       
     </footer>
